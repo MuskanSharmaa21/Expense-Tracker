@@ -30,4 +30,4 @@ const RecentIncomeWithChart =({data,totalIncome})=>{
     </div>
   )
 }
-export default RecentIncomeWithChart
+export default RecentIncomeWithChart;

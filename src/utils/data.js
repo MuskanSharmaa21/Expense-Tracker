@@ -20,6 +20,6 @@ export const SIDE_MENU_DATA = [
     id : "06",
     icon: LuLogOut,
     label: "LogOut",
-    path : "/logou",
+    path : "/logout",
   }
 ]

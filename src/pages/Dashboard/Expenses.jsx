@@ -1,9 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axiosInstance from "../../utils/axiosInstance";
+import useUserAuth from "../../hooks/useUserAuth";
+import DashboardLayout from "../../components/Layouts/DashboardLayout";
+import ExpenseOverview from "../../components/Expense/ExpenseOverview";
+import ExpenseList from "../../components/Expense/ExpenseList";
+import Modal from "../../components/Modal";
+import AddExpenseForm from "../../components/Expense/AddExpenseForm"
+import DeleteAlert from "../../components/DeleteAlert";
+import { API_PATH } from "../../utils/apiPath";
 
 const Expenses=()=>{
 
-  useUserAuth();
+    useUserAuth();
     const [openAddExpenseModal, setOpenAddExpenseModal] =useState(true);
     const[loading,setLoading] = useState(false);
     const[openDeleteAlert, setOpenDeleteAlert] = useState({
@@ -16,7 +24,7 @@ const Expenses=()=>{
       setLoading(true);
       try{
         const response = await axiosInstance.get(
-          `${API.PATHS.EXPENSE.GET_ALL_EXPENSE}`
+          `${API.PATH.EXPENSE.GET_ALL_EXPENSE}`
         );
         if(response.data){
           setexpenseData(response.data);
@@ -43,7 +51,7 @@ const Expenses=()=>{
         toast.error("Date is required")
       }
       try{
-        await axiosInstance.post(API_PATHS.EXPENSE.ADD_EXPENSE,{
+        await axiosInstance.post(API_PATH.EXPENSE.ADD_EXPENSE,{
           category,
           amount,
           date,
@@ -64,7 +72,7 @@ const Expenses=()=>{
     },[]);
     const deleteExpense =async(id)=>{
       try{
-        await axiosInstance.delete(API_PATHS.EXPENSE.DELETE_EXPENSE(id))
+        await axiosInstance.delete(API_PATH.EXPENSE.DELETE_EXPENSE(id))
         setOpenDeleteAlert({show:false, data:null});
         toast.success("Expense details deleted successfully")
         fetchExpenseDetails();
@@ -86,7 +94,7 @@ const Expenses=()=>{
     const handleDownloadExpenseDetails=async()=>{
       try{
         const response = await axiosInstance.get (
-          API_PATHS.EXPENSE.DOWNLOAD_EXPENSE,
+          API_PATH.EXPENSE.DOWNLOAD_EXPENSE,
           {
             responseType:"blob"
           }
@@ -111,7 +119,7 @@ const Expenses=()=>{
         <div className="my-5 nx-auto">
           <div className="grid grid-cols-1 gap-6">
             <div className="">
-              <ExpenseOverview 
+              <ExpenseOverview
                transactions={expenseData}
                onExpenseExpense={()=> setOpenAddExpenseModal(true)} />
             </div>
@@ -122,7 +130,7 @@ const Expenses=()=>{
              }}
              onDownload={handleDownloadExpenseDetails} />
           </div>
-          <Modal 
+          <Modal
            isOpen={openAddExpenseModal}
            onClose={()=>setOpenAddExpenseModal(false)} 
            title="Add Expense"

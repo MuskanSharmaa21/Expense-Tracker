@@ -28,3 +28,5 @@ const ExpenseList=({transactions, onDelete,onDownload})=>{
     </div>
   )
 }
+
+export default ExpenseList;

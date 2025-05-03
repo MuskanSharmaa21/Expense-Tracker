@@ -4,7 +4,6 @@ import SideMenu from "./SideMenu";
 
 const DashboardLayout = ({ children, activeMenu }) => {
   const { user } = useUserAuth(); 
-  console.log("Current user: ", user); 
 
   if (!user) return <div>Loading user...</div>;
 
