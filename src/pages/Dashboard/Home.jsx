@@ -1,4 +1,3 @@
-// Home.jsx
 import React, { useEffect, useState } from "react";
 import { IoMdCard } from "react-icons/io";
 import { LuHandCoins, LuWalletMinimal } from "react-icons/lu";
@@ -20,7 +19,7 @@ const Home = () => {
   useUserAuth();
   const navigate = useNavigate();
   const [dashboardData, setDashboardData] = useState(null);
-  const [loading, setLoading] = useState(false); // Fixed initial state
+  const [loading, setLoading] = useState(false); 
 
   const fetchDashboardData = async () => {
     if (loading) return;
@@ -33,7 +32,7 @@ const Home = () => {
     } catch (error) {
       console.error("Dashboard fetch error:", error.response?.status, error.response?.data);
       if (error.response?.status === 401) {
-        navigate("/login"); // Redirect only on unauthorized
+        navigate("/login"); 
       }
     } finally {
       setLoading(false);

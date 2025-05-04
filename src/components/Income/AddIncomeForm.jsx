@@ -2,6 +2,7 @@ import EmojiPicker from "emoji-picker-react";
 import { Input } from "postcss";
 import React from "react";
 import { useState } from "react";
+import EmojiPickerPopup1 from "../EmojiPickerPopup1";
 const AddIncomeForm =({onAddIncome})=>{
   const[income,setIncome] = useState({
     source:"",
@@ -12,7 +13,7 @@ const AddIncomeForm =({onAddIncome})=>{
   const handleChange =(key,value)=>setIncome({...income,[key]:value});
   return(
     <div>
-      <EmojiPickerPopup 
+      <EmojiPickerPopup1
       icon={income.icon}
       onSelect={(selectedIcon)=>handleChange("icon",selectedIcon)} />
       <Input
@@ -43,4 +44,4 @@ const AddIncomeForm =({onAddIncome})=>{
     </div>
   )
 }
-export default AddIncomeForm
+export default AddIncomeForm;

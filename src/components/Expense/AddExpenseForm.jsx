@@ -36,7 +36,7 @@ const AddExpenseForm =({onAddExpense})=>{
 
        <div className="flex justify-end mt-6">
         <button 
-         className="add-btn add-btn-fill"
+         className="add-btn add-btn-fill text-black"
          onClick={()=>onAddExpense(income)}>
           Add Expense
          </button>
