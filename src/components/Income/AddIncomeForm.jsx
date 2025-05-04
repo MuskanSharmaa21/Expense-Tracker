@@ -1,5 +1,5 @@
 import EmojiPicker from "emoji-picker-react";
-import { Input } from "postcss";
+import Input from "../../components/Input/Input"
 import React from "react";
 import { useState } from "react";
 import EmojiPickerPopup1 from "../EmojiPickerPopup1";
