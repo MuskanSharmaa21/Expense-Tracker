@@ -24,13 +24,27 @@ export const addThousandsSeparator = (num) => {
 
   return fractionalPart ? `${formattedInteger}.${fractionalPart}` : formattedInteger;
 };
-export const prepareExpenseBarChartData=(data=[])=>{
-  const chartData= data.map((item)=>({
-    category : item?.category,
-    amount : item?.amount,
-  }))
-  return chartData;
-}
+// utils/helper.js
+export const prepareExpenseBarChartData = (transactions = []) => {
+  console.log("prepareExpenseBarChartData input:", transactions);
+  if (!Array.isArray(transactions)) {
+    console.warn("Invalid transactions input:", transactions);
+    return [];
+  }
+  const grouped = transactions.reduce((acc, item) => {
+    const category = item.source || item.category || "Unknown";
+    const amount = Number(item.amount) || 0;
+    acc[category] = (acc[category] || 0) + amount;
+    return acc;
+  }, {});
+  const result = Object.entries(grouped).map(([category, amount]) => ({
+    category,
+    amount,
+  }));
+  console.log("prepareExpenseBarChartData output:", JSON.stringify(result, null, 2));
+  return result;
+};
+
 export const prepareIncomeBarChartData =(data=[])=>{
   const sortedData=[...data].sort ((a , b)=>new Date(a.date)- new Date(b.date));
   const chartData = sortedData.map((item)=>({

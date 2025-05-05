@@ -19,20 +19,24 @@ const Home = () => {
   useUserAuth();
   const navigate = useNavigate();
   const [dashboardData, setDashboardData] = useState(null);
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const fetchDashboardData = async () => {
     if (loading) return;
     setLoading(true);
+    setError(null);
     try {
       const response = await axiosInstance.get(API_PATH.DASHBOARD.GET_DASHBOARD);
+      console.log("API response:", response.data);
       if (response.data) {
         setDashboardData(response.data);
       }
     } catch (error) {
       console.error("Dashboard fetch error:", error.response?.status, error.response?.data);
+      setError("Failed to load dashboard data");
       if (error.response?.status === 401) {
-        navigate("/login"); 
+        navigate("/login");
       }
     } finally {
       setLoading(false);
@@ -44,6 +48,10 @@ const Home = () => {
     return () => {};
   }, []);
 
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
+  console.log("dashboardData:", dashboardData);
   return (
     <DashboardLayout activeMenu="Dashboard">
       <div className="my-5 mx-auto">
@@ -79,16 +87,16 @@ const Home = () => {
           totalExpense={dashboardData?.totalExpense || 0}
         />
         <ExpenseTransactions
-          transactions={dashboardData?.last30DaysExpenses?.transactions || []}
+          transactions={dashboardData?.last30daysExpense?.transactions || []}
           onSeeMore={() => navigate("/expense")}
         />
-        <Last30DaysExpenses data={dashboardData?.last30DaysExpenses?.transactions || []} />
+        <Last30DaysExpenses data={dashboardData?.last30daysExpense?.transactions || []} />
         <RecentIncomeWithChart
-          data={dashboardData?.last60DaysIncome?.transactions?.slice(0, 4) || []}
+          data={dashboardData?.last60daysIncome?.transactions?.slice(0, 4) || []}
           totalIncome={dashboardData?.totalIncome || 0}
         />
         <RecentIncome
-          transactions={dashboardData?.last60DaysIncome?.transactions || []}
+          transactions={dashboardData?.last60daysIncome?.transactions || []}
           onSeeMore={() => navigate("/income")}
         />
       </div>
