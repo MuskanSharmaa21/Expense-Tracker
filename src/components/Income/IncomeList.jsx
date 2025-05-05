@@ -1,5 +1,8 @@
 import React from "react";
 import { LuDownload } from "react-icons/lu";
+import TransactionInfoCard from "../Cards/TransactionInfoCard"
+import moment from "moment";
+
 const IncomeList = ({transactions,onDelete,onDownload})=>{
   return(
     <div className="card">

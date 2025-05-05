@@ -11,7 +11,7 @@ const FinanceOverview =({totalBalance, totalIncome, totalExpense})=>{
     <div className="flex items-center justify-between">
       <h5 className="text-lg">Financial Overview</h5>
     </div>
-    <CustomPieChart 
+    <CustomPieChart
      data={balanceData}
      label="total Balance"
      totalAmount = {`$${totalBalance}`}

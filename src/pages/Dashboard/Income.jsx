@@ -8,6 +8,7 @@ import Modal from "../../components/Modal";
 import AddIncomeForm from "../../components/Income/AddIncomeForm";
 import DeleteAlert from "../../components/DeleteAlert";
 import { API_PATH } from "../../utils/apiPath";
+import toast from "react-hot-toast";
 const Income=()=>{
   useUserAuth();
   const [openAddIncomeModal, setOpenAddIncomeModal] =useState(true);
@@ -49,7 +50,7 @@ const Income=()=>{
       toast.error("Date is required")
     }
     try{
-      await axiosInstance.post(API_PATHS.INCOME.ADD_INCOME,{
+      await axiosInstance.post(API_PATH.EXPENSE.ADD_INCOME,{
         source,
         amount,
         date,
@@ -66,7 +67,7 @@ const Income=()=>{
   }
   const deleteIncome =async(id)=>{
     try{
-      await axiosInstance.delete(API_PATHS.INCOME.DELETE_INCOME(id))
+      await axiosInstance.delete(API_PATH.INCOME.DELETE_INCOME(id))
       setOpenDeleteAlert({show:false, data:null});
       toast.success("Income details deleted successfully")
       fetchIncomeDetails();
@@ -81,7 +82,7 @@ const Income=()=>{
   const handleDownloadIncomeDetails =async()=>{
     try{
       const response = await axiosInstance.get (
-        API_PATHS.INCOME.DOWNLOAD_INCOME,
+        API_PATH.INCOME.DOWNLOAD_INCOME,
         {
           responseType:"blob"
         }
