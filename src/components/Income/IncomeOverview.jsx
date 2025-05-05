@@ -9,11 +9,10 @@ const IncomeOverview =({transactions,onAddIncome})=>{
   useEffect(()=>{
     const result = prepareIncomeBarChartData(transactions);
     setChartData(result);
-
     return()=>{
     }
   },[transactions]);
-
+  console.log(chartData)
   return(
     <div className="card">
       <div className="flex items-center justify-between">

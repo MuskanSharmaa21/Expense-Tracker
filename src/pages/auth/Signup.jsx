@@ -58,7 +58,7 @@ const Signup = () => {
         navigate("/dashboard");
       }
     } catch (error) {
-      console.log("Response data:", error.response?.data);
+
       if (error.response && error.response.data.message) {
         setError(error.response.data.message);
       } else {

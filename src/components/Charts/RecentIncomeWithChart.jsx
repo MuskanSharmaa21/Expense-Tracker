@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from "react";
 import CustomPieChart from "./CustomPieChart";
+
 const RecentIncomeWithChart =({data,totalIncome})=>{
   const [chartData, setChartData] = useState([]);
   const COLORS =["875CF5","#FA2C37","#FF6900","4f39f6"];
@@ -16,6 +17,7 @@ const RecentIncomeWithChart =({data,totalIncome})=>{
 
     }
   },[data]);
+  console.log("chartData", chartData);
   return (
     <div className="card">
       <div className="flex items-center justify-between">

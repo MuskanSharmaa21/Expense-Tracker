@@ -3,6 +3,7 @@ import React from "react";
 import { LuDownload } from "react-icons/lu";
 import TransactionInfoCard from "../Cards/TransactionInfoCard"
 const ExpenseList=({transactions, onDelete,onDownload})=>{
+  console.log("ExpenseList", transactions)
   return (
     <div className="card">
       <div className="flex items-center justify-between">
@@ -14,7 +15,7 @@ const ExpenseList=({transactions, onDelete,onDownload})=>{
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2">
         {transactions?.map((expense)=>{
-          <TransactionInfoCard
+          return (<TransactionInfoCard
           key={expense.id}
           title={expense.category}
           icon={expense.icon}
@@ -22,7 +23,7 @@ const ExpenseList=({transactions, onDelete,onDownload})=>{
           amount={expense.amount}
           type="expense"
           onDelete= {()=>{expense._id}}
-          />
+          />)
         })}
       </div>
     </div>

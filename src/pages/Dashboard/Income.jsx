@@ -24,16 +24,14 @@ const Income=()=>{
     setLoading(true);
     try{
       const response = await axiosInstance.get(API_PATH.EXPENSE.GET_INCOME);
-
-      if(response.data){
-        setIncomeData(response.data);
-      }
+      console.log("Income response", response);
+      setIncomeData(response.data);
     } catch(error){
       console.log("Something went wrong, Please try again later", error)
     } finally{
       setLoading(false)
     }
-    
+
 
   }
   const handleAddIncome =async(income)=>{
@@ -104,13 +102,14 @@ const Income=()=>{
     fetchIncomeDetails();
     return()=>{}
   },[]);
+  console.log("Income data", incomeData)
   return(
     <DashboardLayout activeMenu="Income">
       <div className="my-5 nx-auto">
         <div className="grid grid-cols-1 gap-6">
           <div className="">
             <IncomeOverview 
-            transaction={incomeData}
+            transactions={incomeData}
             onAddIncome={()=>{setOpenAddIncomeModal(true)}} />
           </div>
           <IncomeList

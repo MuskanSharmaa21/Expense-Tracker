@@ -1,8 +1,9 @@
 import React from "react";
-import TransactionInfoCard from "../Cards/InfoCard";
+import TransactionInfoCard from "../Cards/TransactionInfoCard";
 import { LuArrowRight } from "react-icons/lu";
 import moment from "moment";
-const RecentIncome =({transaction,onSeeMore})=>{
+const RecentIncome =({transaction, onSeeMore})=>{
+  console.log("transaction", transaction);
   return(
     <div className="card">
       <div className="flex items-center justify-between">
@@ -13,14 +14,14 @@ const RecentIncome =({transaction,onSeeMore})=>{
       </div>
       <div className="mt-6">
         {transaction?.slice(0,5)?.map((item)=>{
-          <TransactionInfoCard
+          return (<TransactionInfoCard
           key={item._id}
           title={item.source}
           icon={item.icon}
-          date={moment(item.date.format("Do MM YYYY"))}
+          date={moment(item.date).format("DD MMM YYYY")}
           amount={item.amount}
-          type="Income"
-          hideDeleteBtn />
+          type="income"
+          hideDeleteBtn />)
         })}
       </div>
     </div>

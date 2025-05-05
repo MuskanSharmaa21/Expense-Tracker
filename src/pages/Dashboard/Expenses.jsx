@@ -27,9 +27,8 @@ const Expenses = () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get(API_PATH.EXPENSE.GET_EXPENSE);
-      if (response.data) {
-        setExpenseData(response.data);
-      }
+      setExpenseData(response.data);
+
     } catch (error) {
       console.log("Something went wrong, Please try again later", error);
     } finally {
@@ -101,10 +100,10 @@ const Expenses = () => {
   useEffect(() => {
     fetchExpenseDetails();
   }, []);
-
+  console.log(expenseData);
   return (
     <DashboardLayout activeMenu="Expense">
-      <div className="my-5 mx-auto">
+      <div className="my-5 mx-auto"> 
         <div className="grid grid-cols-1 gap-6">
           <ExpenseOverview
             transactions={expenseData}

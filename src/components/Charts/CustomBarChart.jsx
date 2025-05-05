@@ -11,17 +11,15 @@ import {
 } from "recharts";
 
 const CustomBarChart = ({ data = [] }) => {
-  console.log("1");
-  console.log("Data prop:", JSON.stringify(data, null, 2));
 
   const getBarColor = (index) => {
     return index % 2 === 0 ? "#875cf5" : "#cfbefb";
   };
 
   const CustomToolTip = ({ active, payload }) => {
-    console.log("Tooltip full payload:", { active, payload });
+
     if (active && payload && payload.length) {
-      console.log("2");
+
       return (
         <div className="bg-white shadow-md rounded-lg p-2 border border-gray-300">
           <p className="text-xs font-semibold text-purple-100 mb-1">
@@ -47,17 +45,17 @@ const CustomBarChart = ({ data = [] }) => {
       <ResponsiveContainer width="100%" height={300}>
         <BarChart data={data.length ? data : testData}>
           <CartesianGrid stroke="none" />
-          <XAxis dataKey="category" tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
+          <XAxis dataKey="source" tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
           <YAxis tick={{ fontSize: 12, fill: "#555" }} stroke="none" />
           <Tooltip content={<CustomToolTip />} />
           <Bar dataKey="amount" radius={[10, 10, 0, 0]} activeBar={{ fill: "green" }}>
             {data.length
               ? data.map((entry, index) => {
-                  console.log("Rendering bar:", entry);
+
                   return <Cell key={`cell-${index}`} fill={getBarColor(index)} />;
                 })
               : testData.map((entry, index) => {
-                  console.log("Rendering test bar:", entry);
+
                   return <Cell key={`cell-${index}`} fill={getBarColor(index)} />;
                 })}
           </Bar>

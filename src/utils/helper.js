@@ -26,7 +26,7 @@ export const addThousandsSeparator = (num) => {
 };
 // utils/helper.js
 export const prepareExpenseBarChartData = (transactions = []) => {
-  console.log("prepareExpenseBarChartData input:", transactions);
+
   if (!Array.isArray(transactions)) {
     console.warn("Invalid transactions input:", transactions);
     return [];
@@ -41,7 +41,7 @@ export const prepareExpenseBarChartData = (transactions = []) => {
     category,
     amount,
   }));
-  console.log("prepareExpenseBarChartData output:", JSON.stringify(result, null, 2));
+
   return result;
 };
 

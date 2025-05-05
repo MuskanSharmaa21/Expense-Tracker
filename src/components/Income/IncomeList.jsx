@@ -13,7 +13,7 @@ const IncomeList = ({transactions,onDelete,onDownload})=>{
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2" >
         {transactions?.map((income)=>{
-          <TransactionInfoCard
+          return (<TransactionInfoCard
           key={income._id}
           title={income.source}
           icon={income.icon}
@@ -21,7 +21,7 @@ const IncomeList = ({transactions,onDelete,onDownload})=>{
           amount={income.amount}
           type="income"
           onDelete={()=>onDelete(income._id)}
-          />
+          />)
         })}
       </div>
     </div>

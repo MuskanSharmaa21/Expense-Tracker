@@ -28,7 +28,7 @@ const Home = () => {
     setError(null);
     try {
       const response = await axiosInstance.get(API_PATH.DASHBOARD.GET_DASHBOARD);
-      console.log("API response:", response.data);
+
       if (response.data) {
         setDashboardData(response.data);
       }
@@ -47,29 +47,28 @@ const Home = () => {
     fetchDashboardData();
     return () => {};
   }, []);
-
+  console.log("dashboardData", dashboardData);
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
-  console.log("dashboardData:", dashboardData);
   return (
     <DashboardLayout activeMenu="Dashboard">
       <div className="my-5 mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <InfoCard
-            icon={<IoMdCard />}
+            icon={<IoMdCard className=" text-black" />}
             label="Total Balance"
             color="bg-primary"
             value={addThousandsSeparator(dashboardData?.totalBalance) || "0"}
           />
           <InfoCard
-            icon={<LuWalletMinimal />}
+            icon={<LuWalletMinimal className=" text-green-500"/>}
             label="Total Income"
             color="bg-orange-500"
             value={addThousandsSeparator(dashboardData?.totalIncome) || "0"}
           />
           <InfoCard
-            icon={<LuHandCoins />}
+            icon={<LuHandCoins className=" text-red-500"/>}
             label="Total Expense"
             color="bg-red-500"
             value={addThousandsSeparator(dashboardData?.totalExpense) || "0"}
@@ -96,7 +95,7 @@ const Home = () => {
           totalIncome={dashboardData?.totalIncome || 0}
         />
         <RecentIncome
-          transactions={dashboardData?.last60daysIncome?.transactions || []}
+          transaction={dashboardData?.last60daysIncome?.transactions || []}
           onSeeMore={() => navigate("/income")}
         />
       </div>
