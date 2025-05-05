@@ -65,7 +65,7 @@ const Income=()=>{
   }
   const deleteIncome =async(id)=>{
     try{
-      await axiosInstance.delete(API_PATH.INCOME.DELETE_INCOME(id))
+      await axiosInstance.delete(API_PATH.EXPENSE.DELETE_INCOME(id))
       setOpenDeleteAlert({show:false, data:null});
       toast.success("Income details deleted successfully")
       fetchIncomeDetails();
@@ -134,6 +134,7 @@ const Income=()=>{
         <DeleteAlert
          content="Are you sure you want to delete this income details?"
          onDelete={()=>deleteIncome(openDeleteAlert.data)}
+         className=""
          />
       </Modal>
       </div>
